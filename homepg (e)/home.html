@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .event-list, .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .completed-task {
+            color: green;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .add-task-form {
+            margin-top: 10px;
+        }
+
+        .add-task-form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .manage-user-dropdown {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .manage-user-dropdown button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .manage-user-dropdown-content {
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+            display: none;
+            top: 100%;
+            right: 0;
+        }
+
+        .manage-user-dropdown:hover .manage-user-dropdown-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .manage-user-dropdown-content a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .manage-user-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="manage-user-dropdown">
+            <button class="btn">Manage User</button>
+            <div class="manage-user-dropdown-content">
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('create_user') }}">Create User</a>
+            </div>
+        </div>
+
+        <h1>Welcome to EcoChicHub (Employee)</h1>
+
+        <h2>Upcoming Meetings</h2>
+        <ul class="event-list">
+            {% for meeting in meetings %}
+                <li>{{ meeting.title }} - Date: {{ meeting.date }}, Time: {{ meeting.time }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Tasks</h2>
+        <form method="post" action="{{ url_for('update_tasks') }}">
+            <ul class="task-list">
+                {% for task in tasks %}
+                    <li class="{% if task.completed %}completed-task{% endif %}">
+                        <input type="checkbox" name="task_{{ loop.index }}" {% if task.completed %}checked{% endif %}>
+
+                        {{ task.description }} - Deadline: {{ task.deadline }}
+                        <input type="hidden" name="task_{{ loop.index }}_id" value="{{ loop.index }}">
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn">Update Tasks</button>
+        </form>
+
+        <div class="add-task-form">
+            <form method="get" action="{{ url_for('add_task_form') }}">
+                <button type="submit" class="btn">Add Task</button>
+            </form>
+        </div>
+
+        <h2>Upcoming Sales Events</h2>
+        <ul class="event-list">
+            {% for event in sales_events %}
+                <li>{{ event.title }} - Date: {{ event.date }}, Time: {{ event.time }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('schedule') }}" class="btn">View Entire Schedule</a>
+    </div>
+</body>
+</html>

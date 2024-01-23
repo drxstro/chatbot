@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Task</h2>
+        <form method="post" action="{{ url_for('add_task') }}">
+            <label for="new_task_description">Task Description:</label>
+            <input type="text" id="new_task_description" name="new_task_description" required>
+
+            <label for="new_task_deadline">Deadline (YYYY-MM-DD):</label>
+            <input type="text" id="new_task_deadline" name="new_task_deadline" pattern="\d{4}-\d{2}-\d{2}" required>
+
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+</body>
+</html>
