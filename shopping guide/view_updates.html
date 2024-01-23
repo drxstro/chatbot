@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Updates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>View Updates</h2>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Size</th>
+            <th>Color</th>
+        </tr>
+        {% for key, update in updates.items() %}
+        <tr>
+            <td>{{ key.split('_')[0] }}</td>
+            <td>{{ key.split('_')[1] }}</td>
+            <td>{{ update.size }}</td>
+            <td>{{ update.color }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoChicHub</title>
+    <style>
+        body {
+            display: flex;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            display: block;
+            padding: 8px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .subcategory a {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+
+        .subcategory img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>EcoChicHub</h2>
+        <ul>
+            <li><a href="#">For You</a></li>
+            <li><a href="#">New In</a></li>
+            <li><a href="#">Women Clothing</a></li>
+            <li><a href="#">Men Clothing</a></li>
+            <li><a href="#">Kids Clothing</a></li>
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Beauty and Health</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="category">
+            <h3>Picks For You</h3>
+            <div class="subcategory">
+                <a href="{{ url_for('update', category='picks', subcategory='Womens tops') }}">
+                    <img src="path/to/womens_top.jpg" alt="Women's Tops">
+                    Womens Tops
+                </a>
+                <a href="{{ url_for('update', category='picks', subcategory='Womens bottoms') }}">
+                    <img src="path/to/women_bottoms_image.jpg" alt="Women's Bottoms">
+                    Womens Bottoms
+                </a>
+                <a href="{{ url_for('update', category='picks', subcategory='Dresses') }}">
+                    <img src="path/to/dresses_image.jpg" alt="Dresses">
+                    Dresses
+                </a>
+                <a href="{{ url_for('update', category='picks', subcategory='Bags') }}">
+                    <img src="path/to/bags_image.jpg" alt="Bags">
+                    Bags
+                </a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h3>You May Also Like</h3>
+            <div class="subcategory">
+                <a href="{{ url_for('update', category='like', subcategory='Shoes') }}">
+                    <img src="path/to/shoes_image.jpg" alt="Shoes">
+                    Shoes
+                </a>
+                <a href="{{ url_for('update', category='like', subcategory='Womens shorts') }}">
+                    <img src="path/to/women_shorts_image.jpg" alt="Women's Shorts">
+                    Womens Shorts
+                </a>
+                <a href="{{ url_for('update', category='like', subcategory='Hats') }}">
+                    <img src="path/to/hats_image.jpg" alt="Hats">
+                    Hats
+                </a>
+                <a href="{{ url_for('update', category='like', subcategory='Womens Two-Piece Outfits') }}">
+                    <img src="path/to/women_two_piece_outfits_image.jpg" alt="Women's Two-Piece Outfits">
+                    Womens Two-Piece Outfits
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

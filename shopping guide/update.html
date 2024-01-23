@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Size and Color</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .size-options, .color-options {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #F5F5DC;  /* Beige color */
+            color: #333;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{{ url_for('update', category=category, subcategory=subcategory) }}">
+        <h2>Customise your likings for {{ subcategory }}</h2>
+
+        <div class="options-container">
+            <div class="size-options">
+                <label for="size">Size:</label>
+                <input type="radio" id="xsmall" name="size" value="XS" required>
+                <label for="small">XS</label>
+                <input type="radio" id="small" name="size" value="S" required>
+                <label for="small">S</label>
+                <input type="radio" id="medium" name="size" value="M" required>
+                <label for="medium">M</label>
+                <input type="radio" id="large" name="size" value="L" required>
+                <label for="large">L</label>
+                <input type="radio" id="xlarge" name="size" value="XL" required>
+                <label for="large">XL</label>
+            </div>
+
+            <div class="color-options">
+                <label for="color">Color:</label>
+                <input type="radio" id="black" name="color" value="Black" required>
+                <label for="red">Black</label>
+                <input type="radio" id="white" name="color" value="White" required>
+                <label for="red">White</label>
+                <input type="radio" id="grey" name="color" value="Grey" required>
+                <label for="red">Grey</label>
+                <input type="radio" id="red" name="color" value="Red" required>
+                <label for="red">Red</label>
+                <input type="radio" id="blue" name="color" value="Blue" required>
+                <label for="blue">Blue</label>
+                <input type="radio" id="green" name="color" value="Green" required>
+                <label for="green">Green</label>
+            </div>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+        </div>
+
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
