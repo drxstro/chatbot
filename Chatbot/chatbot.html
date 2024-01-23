@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCHATBot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flash-messages {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            background-color: #ffcccc;
+            color: #333;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .user-message {
+            text-align: right;
+            background-color: #dbf4ff;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .bot-message {
+            text-align: left;
+            background-color: #fff;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .chat-input {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        .send-button {
+            margin-left: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        EcoChicBOT
+    </div>
+    <div class="chat-container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="chat-messages">
+            {% if user_message %}
+                <div class="chat-message user-message">
+                    <p>{{ user_message }}</p>
+                </div>
+            {% endif %}
+            {% if bot_response %}
+                <div class="chat-message bot-message">
+                    <p>{{ bot_response | safe }}</p>
+                </div>
+            {% endif %}
+        </div>
+        <form action="/chat" method="post" class="chat-input">
+            <input type="text" id="user_message" name="user_message" class="chat-input" required pattern="[A-Za-z0-9\s]+" title="Please enter only letters and numbers." placeholder="Type your message here...">
+            <button type="submit" class="send-button">Send</button>
+        </form>
+
+        <!-- CRUD operations links -->
+        <div>
+            <a href="/view_chat">View Chat History</a>
+        </div>
+    </div>
+</body>
+</html>

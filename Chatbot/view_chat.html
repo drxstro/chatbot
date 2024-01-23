@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCHATBot - Chat History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flash-messages {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            background-color: #ffcccc;
+            color: #333;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            padding: 10px;
+            overflow: hidden;
+            margin: 5px;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #dbf4ff;
+        }
+
+        .bot-message {
+            background-color: #fff;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .back-button,
+        .delete-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            margin-left: 10px;
+            background-color: #ff3333;
+            color: white;
+        }
+
+        .checkbox-container {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        EcoChicBOT - Chat History
+    </div>
+    <div class="chat-container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="chat-messages">
+            <form action="{{ url_for('delete_chat_history') }}" method="post" onsubmit="return confirm('Are you sure you want to delete the selected messages?');">
+                <div class="chat-message">
+                    <div class="checkbox-container">
+                        <label for="select-all">Select All</label>
+                        <input type="checkbox" id="select-all" name="select_all">
+                    </div>
+                </div>
+                {% for message in chat_history %}
+                    <div class="chat-message {{ 'user-message' if message['user'] == 'User' else 'bot-message' }}">
+                        <div class="checkbox-container">
+                            <input type="checkbox" name="selected_messages[]" value="{{ loop.index }}">
+                        </div>
+                        <p>{{ message['message'] }}</p>
+                    </div>
+                {% endfor %}
+                <button class="delete-button" type="submit">Delete Selected Messages</button>
+            </form>
+        </div>
+        <div class="button-container">
+            <a href="{{ url_for('index') }}" class="back-button">Back to Chatbot</a>
+        </div>
+    </div>
+</body>
+</html>
